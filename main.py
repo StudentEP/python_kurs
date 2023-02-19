@@ -37,21 +37,32 @@ class Polygon:
             vertices_str+=str(vertex) + ", "
         return f"Polygon({vertices_str[:-2]})"
     def svg(self):
-        #<polygon points = "200, 10 250,190 160,210"/>
+        #<polygon points = "200, 10 250,190 160,210" / >
         vertices_str = ""
         for vertex in self.vertices:
             vertices_str += f'{vertex.x,},{vertex.y} '
         return f'<polygon points = "{vertices_str[:-1]}"/>'
-def main():
-    p = Point(300, 0)
-    q = Point(0, 400)
 
-    polygon=Polygon()
-    polygon.add(p)
-    polygon.add(q)
-    polygon.add(Point(300,400))
+    def area(self):
+        result = 0
+        for i in range(len(self.vertices)):
+            pa = self.vertices[i]
+            pn = self.vertices[(i+1)%len(self.vertices)]
+            det = (pa.x*pn.y) - (pa.y*pn.x)
+            result += det
+            return abs(result/2)
+   def main():
+     p = Point(300, 0)
+     q = Point(0, 400)
 
-    print(polygon.svg())
+     polygon = Polygon()
+     polygon.add(p)
+     polygon.add(q)
+     polygon.add(Point(300,400))
+
+     # print(polygon.svg())
+
+      print(polygon.area())
 
 
 
