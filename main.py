@@ -9,20 +9,24 @@ class Point:
     def __str__(self) -> str:
         return f"Point({self.x}, {self.y})"
 
+    def translate(self,x,y):
+        self.x+=x
+        self.y+=y
+
 
 class Segment:
     def __init__(self, p1, p2):
         self.p1 = p1
         self.p2 = p2
 
-        def __str__(self) -> str:
-            return f"Segment({self.p1}, {self.p2})"
+    def __str__(self) -> str:
+        return f"Segment({self.p1}, {self.p2})"
 
     def distance(self):
         return math.hypot(self.p1.x - self.p2.x, self.p1.y - self.p2.y)
 
     def svg(self):
-        return f'<line x1="{self.p1.x}" y1="{self.p1.y}" x2="{self.p2.x}" y2"{self.p2.y}" style="stroke:black" />'
+        return f'<line x1="{self.p1.x}" y1="{self.p1.y}" x2="{self.p2.x}" y2="{self.p2.y}" style="stroke:black" />'
 
 
 class Polygon:
@@ -39,7 +43,7 @@ class Polygon:
         return f"Polygon({vertices_str[:-2]})"
 
     def svg(self):
-        # <polygon points = "200, 10 250,190 160,210" / >
+        # <polygon points = "200,10 250,190 160,210" / >
         vertices_str = ""
         for vertex in self.vertices:
             vertices_str += f'{vertex.x},{vertex.y} '
@@ -63,6 +67,10 @@ class Polygon:
             polygon.add(Point(x, y))
         return polygon
 
+    def translate(self, x, y):
+        for vertex in self.vertices:
+            vertex.translate(x,y)
+
 
 def main():
     p = Point(300, 0)
@@ -77,6 +85,7 @@ def main():
     # print(polygon.area())
 
     pentagon = Polygon.regular_pentagon(150)
+    pentagon.translate(200,300)
     print(pentagon.svg())
 
 
