@@ -29,10 +29,31 @@ class Segment:
         return f'<line x1="{self.p1.x}" y1="{self.p1.y}" x2="{self.p2.x}" y2="{self.p2.y}" style="stroke:black" />'
 
 
-class Polygon:
+class Shape:
     def __init__(self, style):
+        self.style = style
+
+class Ellipse(Shape):
+    def __init__(self, center, rx, ry,  style):
+        super().__init__(style)
+        self.center=center
+        self.rx=rx
+        self.ry=ry
+
+    def svg(self):
+        # <ellipse cx="200" cy="80" rx="100" ry="50"
+        return f'<ellipse cx = "{self.center.x}" \
+           cy= "{self.center.y}" rx= "{self.rx}" \
+           ry= "{self.ry}" {self.style.svg()} />'
+
+    def bottom_right(self):
+        return Point(self.center.x + self.rx, self.center.y + self.ry)
+
+class Polygon(Shape):
+    def __init__(self, style):
+        super().__init__(style)
         self.vertices = []
-        self.style=style
+
 
     def add(self, vertex):
         self.vertices.append(vertex)
@@ -120,6 +141,7 @@ def main():
     scene=Scene()
     scene.add(polygon)
     scene.add(pentagon)
+    scene.add(Ellipse(Point(100,250),300,150,Style("green")))
     scene.save("plik.html")
 
 
