@@ -1,7 +1,23 @@
 from collections import namedtuple
 import datetime
 
-Person = namedtuple("Person", "first_name, last_name, date_of_birth")
+# Person = namedtuple("Person", "first_name, last_name, date_of_birth")
+
+class Person:
+    def __init__(self, first_name, last_name, date_of_birth):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.date_of_birth = date_of_birth
+    def __str__(self):
+        return f'Person({self.first_name}, {self.last_name}, {self.date_of_birth})'
+
+class Account(Person):
+        def __init__(self, person):
+            super().__init__(person.first_name, person.last_name, person.date_of_birth)
+            self.login = person.first_name[0].lower() + person.last_name.lower()
+
+        def __str__(self):
+            return f'Account({self.login} {self.first_name}, {self.last_name}, {self.date_of_birth})'
 
 
 def person_from_line(line : str):
@@ -70,10 +86,10 @@ def main():
 
     people = people_from_csv("lista")
     sort_by_age(people)
-    people=filter_by_last_name(people, "ko no")
+    # people=filter_by_last_name(people, "ko no")
     for person in people:
-        print(person)
-    print(people)
+        print(Account(person))
+
     # arr=[2, 7, 19, -5, -26]
     # merge_sort(arr, lambda value:value%2)
     # print(arr)
