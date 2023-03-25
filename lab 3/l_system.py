@@ -8,6 +8,18 @@ def apply(c):
         return c
 
 
+import turtle
+
+
+def apply(c):
+    if c == "A":
+        return "B-A-B"
+    elif c == "B":
+        return "A+B+A"
+    else:
+        return c
+
+
 def transform(original):
     result = ""
     for c in original:
@@ -25,7 +37,7 @@ def create_l_system(n, start):
 
 def draw_l_system(t, instructions, angle, length):
     for c in instructions:
-        if c == "F":
+        if c in ["A", "B"]:
             t.forward(length)
         elif c == "-":
             t.right(angle)
@@ -38,6 +50,6 @@ def draw():
     t = turtle.Turtle()
 
     t.speed(100)
-    instructions = create_l_system(3, "F")
-    draw_l_system(t,instructions,90,10)
+    instructions = create_l_system(8, "A")
+    draw_l_system(t,instructions,60,2)
     screen.exitonclick()
