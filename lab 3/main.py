@@ -1,45 +1,17 @@
-operators = ['+', '-', '*', '/', '(', ')']
-def rvp(infix):
-    stack = []
-    postfix = ""
-    priority = {'+':1, '-':1, '*':2, '/':2}
-    for c in infix:
-        if c not in operators:
-            postfix += c
-        elif c=='(':
-            stack.append(c)
-        elif c==')':
-            while len(stack)>0 and stack[-1]!='(':
-                postfix += stack.pop()
-            stack.pop()
-        else:
-            while len(stack)>0 and stack[-1]!='(' and priority[c]<=priority[stack[-1]]:
-                postfix += stack.pop()
-            stack.append(c)
-    while len(stack)>0:
-        postfix += stack.pop()
-    return postfix
-
-def solve(postfix):
-    stack=[]
-    for c in postfix.split():
-        if c not in operators:
-            stack.append(int(c))
-        else:
-            right = stack.pop()
-            left = stack.pop()
-            if c=="+":
-                stack.append(right+left)
-            if c=="-":
-                stack.append(left-right)
-            if c=="*":
-                stack.append(right*left)
-            if c=="/":
-                stack.append(left/right)
-    return stack.pop()
+#import reverse_polish_notation as rpn
+import random
+from reverse_polish_notation import *
+from monte_carlo import approximate_pi
+import simply_draw as sd
+from l_system import draw
 def main():
-    #print(rvp("((2+7)/3+(8−3)*4)/2")) # 2 7 + 3 / 8 3 − 4 * + 2 /
-    print(solve("2 7 + 3 / 14 3 - 4 * + 2 /"))
+    #print(rvp("((2+7)/3+(8-3)*4)/2")) # 2 7 + 3 / 8 3 − 4 * + 2 /
+    #print(solve("2 7 + 3 / 14 3 - 4 * + 2 /"))
+    #print(approximate_pi())
+    #sd.draw_rect()
+    #sd.draw_star()
+    #sd.draw_reg_poly(11)
+    draw()
 
 if __name__ == "__main__":
-        main()
+    main()
