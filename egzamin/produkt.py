@@ -40,3 +40,4 @@ class Produkt:
         if Produkt.waliduj_date(miesiąc, rok):
             return self.__ceny[(rok-2010)*12+miesiąc -1]
         return None
+
