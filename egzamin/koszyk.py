@@ -19,3 +19,9 @@ class Koszyk:
 
     return None
 
+    def roczna_stopa_inflacji(self, miesiac, rok):
+        if Produkt.waliduj_date(miesiac, rok) and rok > 2010:
+            cena_teraz = self.wartosc(miesiac, rok)
+            cena_rok_temu = self.wartosc(miesiac, rok - 1)
+            return (cena_teraz - cena_rok_temu) / cena_rok_temu * 100
+        return None

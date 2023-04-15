@@ -8,7 +8,8 @@ def main():
     koszyk.dodaj(Produkt.produkt("Cebula - za 1 kg"))
     koszyk.dodaj(Produkt.produkt("Cebula - za 1 kg"))
 
-    print(koszyk.wartosc(3,2023))
+
+    print(koszyk.roczna_stopa_inflacji(3,2015))
 
 
 if __name__ == "__main__":
