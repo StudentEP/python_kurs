@@ -7,7 +7,8 @@ def main():
     koszyk = Koszyk()
     koszyk.dodaj(Produkt.produkt("Cebula - za 1 kg"))
     koszyk.dodaj(Produkt.produkt("Cebula - za 1 kg"))
-    pass
+
+    print(koszyk.wartosc(3,2023))
 
 
 if __name__ == "__main__":
