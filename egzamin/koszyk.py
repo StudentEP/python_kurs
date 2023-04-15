@@ -7,3 +7,14 @@ class Koszyk:
             self.__produkty[produkt.get_nazwa()] = produkt,self.__produkty[produkt.get_nazwa()][1]+1
         else:
             self.__produkty[produkt.get_nazwa()] = produkt, 1
+
+
+   def wartość(self, miesiac, rok):
+       if Produkt.waliduj_date(miesiac, rok):
+           suma=0
+           for produkt in self.__produkty:
+               produkt[0].cena(miesiac, rok)*produkt[1]
+           return suma
+
+       return None
+
